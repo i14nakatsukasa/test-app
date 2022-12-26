@@ -22,6 +22,10 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import Copyright from '../components/Copyright';
 
+function getRandom(min: number=0, max: number=1000): number {
+    var random = Math.floor( Math.random() * (max + 1 - min) ) + min;
+    return random;
+}
 
 const inter = Inter({ subsets: ['latin'] })
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -91,7 +95,10 @@ export default function Album() {
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
+            {cards.map((card) => {
+              const rand = getRandom()
+              console.log(rand)
+              return (
               <Grid item key={card} xs={12} sm={6} md={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
@@ -102,7 +109,7 @@ export default function Album() {
                       // 16:9
                       pt: '56.25%',
                     }}
-                    image="https://source.unsplash.com/random?"
+                    image={"https://source.unsplash.com/random?" + getRandom()}
                     alt="random"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
@@ -120,7 +127,8 @@ export default function Album() {
                   </CardActions>
                 </Card>
               </Grid>
-            ))}
+              )
+            })}
           </Grid>
         </Container>
       </main>
