@@ -19,9 +19,12 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import MainFeaturedPost from '../components/MainFeaturedPost';
+
 
 import Copyright from '../components/Copyright';
 import ImageCard from '../components/ImageCard';
+
 
 import TopImage from "../public/IMG_7707.jpg"
 
@@ -29,6 +32,16 @@ const inter = Inter({ subsets: ['latin'] })
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const theme = createTheme();
+
+
+const mainFeaturedPost = {
+  title: 'My Photo Gallary',
+  description:
+    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
+  image: 'https://source.unsplash.com/user/i14nakatukasa',
+  imageText: 'main image description',
+  linkText: 'Continue reading…',
+};
 
 export default function Album() {
   return (
@@ -44,7 +57,8 @@ export default function Album() {
       </AppBar>
       <main>
         {/* Hero unit */}
-        <img src={TopImage} alt="Image" />
+        {/* <Image src={TopImage} alt="Image" /> */}
+        <MainFeaturedPost post={mainFeaturedPost} />
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
