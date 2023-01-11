@@ -29,7 +29,7 @@ import ImageCard from '../components/ImageCard';
 import TopImage from "../public/IMG_7707.jpg"
 
 const inter = Inter({ subsets: ['latin'] })
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const cards = [1, 2, 3, 4, 5, 6];
 
 const theme = createTheme();
 
@@ -61,7 +61,7 @@ export default function Album() {
         <MainFeaturedPost post={mainFeaturedPost} />
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
-          <Grid container spacing={4}>
+          <Grid container spacing={2}>
             {cards.map((card) => {
               return (
                 <Grid item key={card} xs={12} sm={6} md={4}>

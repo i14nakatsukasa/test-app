@@ -7,22 +7,25 @@ import Button from '@material-ui/core/Button';
 
 export default function ImageCard() {
 
-  const getRandom = (min: number = 0, max: number = 1000): number => {
-    var random = Math.floor(Math.random() * (max + 1 - min)) + min;
+  const getRandom = (min: number = 0, max: number = 1000) => {
+    var random = "https://source.unsplash.com/user/i14nakatukasa"
+    //var random = Math.floor(Math.random() * (max + 1 - min)) + min;
     return random;
   }
 
   return (
     <Card
-      sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+      // sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+
+      sx={{ height: '100%', minWidth: 100, p: 2, borderRadius: 2, display: 'flex', flexDirection: 'column' }}
     >
       <CardMedia
         component="img"
         sx={{
           // 16:9
-          pt: '56.25%',
+          pt: '10%',
         }}
-        image={"https://source.unsplash.com/user/i14nakatukasa"}
+        image={getRandom()}
         alt="random"
       />
       <CardContent sx={{ flexGrow: 1 }}>
