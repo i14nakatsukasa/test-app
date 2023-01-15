@@ -13,6 +13,12 @@ export default function ImageCard() {
     return random;
   }
 
+  const fetchImage = async () => {
+    const res = await fetch("https://source.unsplash.com/user/i14nakatukasah");
+    const result = await res.json();
+    return result.urls.full;
+  };
+
   return (
     <Card
       // sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
@@ -25,7 +31,7 @@ export default function ImageCard() {
           // 16:9
           pt: '10%',
         }}
-        image={getRandom()}
+        image={fetchImage()}
         alt="random"
       />
       <CardContent sx={{ flexGrow: 1 }}>
