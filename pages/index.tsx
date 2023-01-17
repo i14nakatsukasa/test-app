@@ -28,6 +28,39 @@ import ImageCard from '../components/ImageCard';
 
 import TopImage from "../public/IMG_7707.jpg"
 
+
+const API_HOST = "https://api.unsplash.com"
+const PATH = "/photos/random"
+const IMAGE_COUNT = 6
+
+const ACCESS_KEY = "KpcSrDgEkhpj7ilWwgjF8VWBHgbJkOCvLVEBvdnMkiI"
+const SECRET_KEY = "mE2QcQeej3yAeVPoJacSoZ_NVfOrUCWX0zrdn-1z9X8"
+
+const requestUnsplash = () => {
+  fetch(`${API_HOST}${PATH}?count=${IMAGE_COUNT}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Client-ID ${ACCESS_KEY}`
+    },
+  }).then((response) => {
+    if (response.ok) {
+        return response.json();
+    } else {
+        throw new Error(response.status);
+    }
+  }).then((data) => {
+    const imageList = data.map((img) => {
+      return img.urls.small
+    })
+    console.log(imageList)
+  }).catch((error) => {
+    console.log(error)
+  })
+}
+
+// テスト
+requestUnsplash()
+
 const inter = Inter({ subsets: ['latin'] })
 const cards = [1, 2, 3, 4, 5, 6];
 

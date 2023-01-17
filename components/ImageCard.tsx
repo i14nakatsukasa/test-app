@@ -31,7 +31,7 @@ export default function ImageCard() {
           // 16:9
           pt: '10%',
         }}
-        image={fetchImage()}
+        image={"https://source.unsplash.com/user/i14nakatukasah"}
         alt="random"
       />
       <CardContent sx={{ flexGrow: 1 }}>
