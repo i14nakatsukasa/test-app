@@ -1,9 +1,10 @@
+import * as React from 'react';
+
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
 import Button from '@material-ui/core/Button';
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import CameraIcon from '@mui/icons-material/PhotoCamera';
 import Card from '@mui/material/Card';
@@ -25,6 +26,7 @@ import MainFeaturedPost from '../components/MainFeaturedPost';
 import Copyright from '../components/Copyright';
 import ImageCard from '../components/ImageCard';
 
+import { initState } from './initState';
 
 import TopImage from "../public/IMG_7707.jpg"
 
@@ -35,31 +37,6 @@ const IMAGE_COUNT = 6
 
 const ACCESS_KEY = "KpcSrDgEkhpj7ilWwgjF8VWBHgbJkOCvLVEBvdnMkiI"
 const SECRET_KEY = "mE2QcQeej3yAeVPoJacSoZ_NVfOrUCWX0zrdn-1z9X8"
-
-const requestUnsplash = () => {
-  fetch(`${API_HOST}${PATH}?count=${IMAGE_COUNT}`, {
-    method: "GET",
-    headers: {
-      Authorization: `Client-ID ${ACCESS_KEY}`
-    },
-  }).then((response) => {
-    if (response.ok) {
-        return response.json();
-    } else {
-        throw new Error(response.status);
-    }
-  }).then((data) => {
-    const imageList = data.map((img) => {
-      return img.urls.small
-    })
-    console.log(imageList)
-  }).catch((error) => {
-    console.log(error)
-  })
-}
-
-// テスト
-requestUnsplash()
 
 const inter = Inter({ subsets: ['latin'] })
 const cards = [1, 2, 3, 4, 5, 6];
@@ -78,6 +55,46 @@ const mainFeaturedPost = {
 };
 
 export default function Album() {
+  // stateとdispatch
+  const reducer = (state: any, action: any) => {
+    return {
+        ...state,
+        [action.type]: action.payload,
+    }
+  }
+  const [state, dispatch] = React.useReducer(reducer, initState)
+
+
+  const requestUnsplash = () => {
+    fetch(`${API_HOST}${PATH}?count=${IMAGE_COUNT}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Client-ID ${ACCESS_KEY}`
+      },
+    }).then((response) => {
+      if (response.ok) {
+          return response.json();
+      } else {
+          throw new Error(response.status);
+      }
+    }).then((data) => {
+      const imageList = data.map((image) => {
+        return image
+      })
+      console.log(imageList)
+      dispatch({type: "imageList", payload: imageList})
+    }).catch((error) => {
+      console.log(error)
+    })
+  }
+
+  // 初回ページリロード時のみ実行
+  React.useEffect(() => {
+    requestUnsplash()
+    console.log(state.imageList)
+  }, [])
+
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -96,10 +113,10 @@ export default function Album() {
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={2}>
-            {cards.map((card) => {
+            {(state.imageList).map((image) => {
               return (
-                <Grid item key={card} xs={12} sm={6} md={4}>
-                  <ImageCard />
+                <Grid item key={image.urls.small} xs={12} sm={6} md={4}>
+                  <ImageCard image={image} />
                 </Grid>
               )
             })}

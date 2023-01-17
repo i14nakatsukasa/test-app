@@ -5,8 +5,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Button from '@material-ui/core/Button';
 
-export default function ImageCard() {
 
+export default function ImageCard(props) {
   const getRandom = (min: number = 0, max: number = 1000) => {
     var random = "https://source.unsplash.com/user/i14nakatukasa"
     //var random = Math.floor(Math.random() * (max + 1 - min)) + min;
@@ -31,16 +31,15 @@ export default function ImageCard() {
           // 16:9
           pt: '10%',
         }}
-        image={"https://source.unsplash.com/user/i14nakatukasah"}
+        image={ props.image.urls.small }
         alt="random"
       />
       <CardContent sx={{ flexGrow: 1 }}>
         <Typography gutterBottom variant="h5" component="h2">
-          Heading
+          { props.image.description }
         </Typography>
         <Typography>
-          This is a media card. You can use this section to describe the
-          content.
+          { props.image.alt_description }
         </Typography>
       </CardContent>
       <CardActions>
