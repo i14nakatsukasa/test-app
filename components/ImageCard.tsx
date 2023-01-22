@@ -5,12 +5,52 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Button from '@material-ui/core/Button';
 
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+
 
 export default function ImageCard(props) {
   const getRandom = (min: number = 0, max: number = 1000) => {
     var random = "https://source.unsplash.com/user/i14nakatukasa"
     //var random = Math.floor(Math.random() * (max + 1 - min)) + min;
     return random;
+  }
+
+
+  const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const displayinfo = () => {
+    return (
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
+    );
   }
 
   const fetchImage = async () => {
@@ -31,19 +71,19 @@ export default function ImageCard(props) {
           // 16:9
           pt: '10%',
         }}
-        image={ props.image.urls.small }
+        image={props.image.urls.small}
         alt="random"
       />
       <CardContent sx={{ flexGrow: 1 }}>
         <Typography gutterBottom variant="h5" component="h2">
-          { props.image.description }
+          {props.image.description}
         </Typography>
         <Typography>
-          { props.image.alt_description }
+          {props.image.alt_description}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">View</Button>
+        <Button size="small" onClick={displayinfo}>View</Button>
         <Button size="small">Edit</Button>
       </CardActions>
     </Card>

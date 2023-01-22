@@ -35,8 +35,8 @@ const API_HOST = "https://api.unsplash.com"
 const PATH = "/photos/random"
 const IMAGE_COUNT = 6
 
-const ACCESS_KEY = "KpcSrDgEkhpj7ilWwgjF8VWBHgbJkOCvLVEBvdnMkiI"
-const SECRET_KEY = "mE2QcQeej3yAeVPoJacSoZ_NVfOrUCWX0zrdn-1z9X8"
+const ACCESS_KEY = "hjfKIWHvCiOtIHuNuZPLyeCade7ssizQ1hTemMrbyMM"
+const SECRET_KEY = "muDRcrHI8scqPtqhjt-CtV4lZbFEOVe1iByB3nm0INE"
 
 const inter = Inter({ subsets: ['latin'] })
 const cards = [1, 2, 3, 4, 5, 6];
@@ -58,8 +58,8 @@ export default function Album() {
   // stateとdispatch
   const reducer = (state: any, action: any) => {
     return {
-        ...state,
-        [action.type]: action.payload,
+      ...state,
+      [action.type]: action.payload,
     }
   }
   const [state, dispatch] = React.useReducer(reducer, initState)
@@ -73,16 +73,16 @@ export default function Album() {
       },
     }).then((response) => {
       if (response.ok) {
-          return response.json();
+        return response.json();
       } else {
-          throw new Error(response.status);
+        throw new Error(response.status);
       }
     }).then((data) => {
       const imageList = data.map((image) => {
         return image
       })
       console.log(imageList)
-      dispatch({type: "imageList", payload: imageList})
+      dispatch({ type: "imageList", payload: imageList })
     }).catch((error) => {
       console.log(error)
     })
