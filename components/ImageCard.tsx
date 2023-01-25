@@ -33,7 +33,9 @@ export default function ImageCard(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const displayinfo = () => {
+
+
+  const DisplayInfo = (props) => {
     return (
       <Modal
         open={open}
@@ -43,10 +45,10 @@ export default function ImageCard(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            {props.title}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            {props.description}
           </Typography>
         </Box>
       </Modal>
@@ -62,7 +64,6 @@ export default function ImageCard(props) {
   return (
     <Card
       // sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-
       sx={{ height: '100%', minWidth: 100, p: 2, borderRadius: 2, display: 'flex', flexDirection: 'column' }}
     >
       <CardMedia
@@ -83,9 +84,11 @@ export default function ImageCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={displayinfo}>View</Button>
+        <Button size="small" onClick={handleOpen}>View</Button>
         <Button size="small">Edit</Button>
       </CardActions>
+
+      <DisplayInfo title={props.image.description} description={props.image.alt_description}/>
     </Card>
   )
 }
