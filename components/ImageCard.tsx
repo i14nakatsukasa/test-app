@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { DisplaySettingsOutlined } from '@mui/icons-material';
 
 
 export default function ImageCard(props) {
@@ -34,7 +33,8 @@ export default function ImageCard(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const DisplayInfo = () => {
+
+  const DisplayInfo = (props) => {
     return (
       <Modal
         open={open}
@@ -44,10 +44,34 @@ export default function ImageCard(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            {props.title}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            {props.description}
+          </Typography>
+        </Box>
+      </Modal>
+    );
+  }
+
+  const [open2, setOpen2] = React.useState(false);
+  const handleOpen2 = () => setOpen2(true);
+  const handleClose2 = () => setOpen2(false);
+
+  const DisplayExif = (props) => {
+    return (
+      <Modal
+        open={open2}
+        onClose={handleClose2}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {props.title}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {props.description}
           </Typography>
         </Box>
       </Modal>
@@ -63,7 +87,6 @@ export default function ImageCard(props) {
   return (
     <Card
       // sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-
       sx={{ height: '100%', minWidth: 100, p: 2, borderRadius: 2, display: 'flex', flexDirection: 'column' }}
     >
       <CardMedia
@@ -83,22 +106,14 @@ export default function ImageCard(props) {
           {props.image.alt_description}
         </Typography>
       </CardContent>
-      {/* <DisplayInfo> */}
       <CardActions>
-        <Button size="small" onClick={() => { DisplayInfo(); }}>View</Button>
-        <Modal open={open} onClose={handleClose}>
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
-          </Box>
-        </Modal>
-        <Button size="small">Edit</Button>
+        <Button size="small" onClick={handleOpen}>View</Button>
+        <Button size="small" onClick={handleOpen2}>Edit</Button>
       </CardActions>
-      {/* </DisplayInfo> */}
+
+      <DisplayInfo title={props.image.description} description={props.image.alt_description} />
+      <DisplayExif title={props.image.exif.make} description={props.image.location.city} />
+
     </Card>
   )
 }
