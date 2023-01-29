@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import { DisplaySettingsOutlined } from '@mui/icons-material';
 
 
 export default function ImageCard(props) {
@@ -33,7 +34,7 @@ export default function ImageCard(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const displayinfo = () => {
+  const DisplayInfo = () => {
     return (
       <Modal
         open={open}
@@ -82,10 +83,22 @@ export default function ImageCard(props) {
           {props.image.alt_description}
         </Typography>
       </CardContent>
+      {/* <DisplayInfo> */}
       <CardActions>
-        <Button size="small" onClick={displayinfo}>View</Button>
+        <Button size="small" onClick={() => { DisplayInfo(); }}>View</Button>
+        <Modal open={open}>
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Text in a modal
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            </Typography>
+          </Box>
+        </Modal>
         <Button size="small">Edit</Button>
       </CardActions>
+      {/* </DisplayInfo> */}
     </Card>
   )
 }
