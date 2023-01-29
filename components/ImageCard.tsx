@@ -34,13 +34,7 @@ export default function ImageCard(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-<<<<<<< HEAD
   const DisplayInfo = () => {
-=======
-
-
-  const DisplayInfo = (props) => {
->>>>>>> f1f4ea32b945e3912eb55f703e78be3b3408a962
     return (
       <Modal
         open={open}
@@ -50,10 +44,10 @@ export default function ImageCard(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            {props.title}
+            Text in a modal
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {props.description}
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography>
         </Box>
       </Modal>
@@ -69,6 +63,7 @@ export default function ImageCard(props) {
   return (
     <Card
       // sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+
       sx={{ height: '100%', minWidth: 100, p: 2, borderRadius: 2, display: 'flex', flexDirection: 'column' }}
     >
       <CardMedia
@@ -90,9 +85,8 @@ export default function ImageCard(props) {
       </CardContent>
       {/* <DisplayInfo> */}
       <CardActions>
-<<<<<<< HEAD
         <Button size="small" onClick={() => { DisplayInfo(); }}>View</Button>
-        <Modal open={open}>
+        <Modal open={open} onClose={handleClose}>
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Text in a modal
@@ -105,13 +99,6 @@ export default function ImageCard(props) {
         <Button size="small">Edit</Button>
       </CardActions>
       {/* </DisplayInfo> */}
-=======
-        <Button size="small" onClick={handleOpen}>View</Button>
-        <Button size="small">Edit</Button>
-      </CardActions>
-
-      <DisplayInfo title={props.image.description} description={props.image.alt_description}/>
->>>>>>> f1f4ea32b945e3912eb55f703e78be3b3408a962
     </Card>
   )
 }
